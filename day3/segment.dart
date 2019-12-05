@@ -13,15 +13,15 @@ class Segment {
 
   Segment(this.x1, this.y1, this.x2, this.y2);
 
-  Orientation orientation(){
-    if(this.x1 == this.x2){
+  Orientation orientation() {
+    if (this.x1 == this.x2) {
       return Orientation.VERTICAL;
-    }else{
+    } else {
       return Orientation.HORITZONTAL;
     }
   }
 
-   double steps() {
+  double steps() {
     if (this.orientation() == Orientation.VERTICAL) {
       return (this.y1 - this.y2).abs();
     } else {
@@ -30,7 +30,8 @@ class Segment {
   }
 
   Point intersection(Segment other) {
-    if (this.x1 == this.x2 && other.y1 == other.y2) {
+    if (this.orientation() == Orientation.VERTICAL &&
+        other.orientation() == Orientation.HORITZONTAL) {
       if ((this.x1 >= min(other.x1, other.x2) &&
               this.x1 <= max(other.x1, other.x2)) &&
           (other.y1 >= min(this.y1, this.y2) &&
@@ -39,7 +40,8 @@ class Segment {
           return Point(this.x1, other.y1);
         }
       }
-    } else if (this.y1 == this.y2 && other.x1 == other.x2) {
+    } else if (this.orientation() == Orientation.HORITZONTAL &&
+        other.orientation() == Orientation.VERTICAL) {
       if ((other.x1 >= min(this.x1, this.x2) &&
               other.x1 <= max(this.x1, this.x2)) &&
           (this.y1 >= min(other.y1, other.y2) &&

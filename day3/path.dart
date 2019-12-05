@@ -7,7 +7,7 @@ class Path {
 
   Path.fromSegmentList(this._segments);
 
-  List<Point> intersectionsBetween(Path other) {
+  List<Point> intersections(Path other) {
     List<Point> points = List();
     for (Segment s1 in this._segments) {
       for (Segment s2 in other._segments) {

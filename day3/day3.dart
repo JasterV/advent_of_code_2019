@@ -5,18 +5,20 @@ import 'dart:math';
 import 'path.dart';
 import 'segment.dart';
 
+Point control = Point(0, 0);
+
 Future main() async {
   File file = File('day3.txt');
   List<String> input = await file.readAsLines();
-  // get the operations
+
   List<String> fstWire = input[0].split(',');
   List<String> sndWire = input[1].split(',');
-  // interpret the operations and build a segment list
-  Path fstWireSeg = buildPath(readOp(fstWire));
-  Path sndWireSeg = buildPath(readOp(sndWire));
-  // Count all the steps
-  part1(fstWireSeg, sndWireSeg);
-  part2(fstWireSeg, sndWireSeg);
+
+  Path fstWirePath = buildPath(readOperations(fstWire));
+  Path sndWirePath = buildPath(readOperations(sndWire));
+
+  part1(fstWirePath, sndWirePath);
+  part2(fstWirePath, sndWirePath);
 }
 
 double manhattanDistance(Point p1, Point p2) {
@@ -24,11 +26,10 @@ double manhattanDistance(Point p1, Point p2) {
 }
 
 void part1(Path fstWire, Path sndWire) {
-  List<Point> intersections = fstWire.intersectionsBetween(sndWire);
-  // Calculate the minDistance
+  List<Point> intersections = fstWire.intersections(sndWire);
   double minDistance = double.infinity;
   for (Point p in intersections) {
-    double distance = manhattanDistance(Point(0, 0), p);
+    double distance = manhattanDistance(control, p);
     if (distance < minDistance) {
       minDistance = distance;
     }
@@ -47,7 +48,7 @@ void part2(Path fstWire, Path sndWire) {
   print(minSteps.toInt());
 }
 
-List<Point> readOp(List<String> data) {
+List<Point> readOperations(List<String> data) {
   List<Point> points = List();
   double x = 0;
   double y = 0;
