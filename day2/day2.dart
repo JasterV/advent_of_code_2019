@@ -21,12 +21,11 @@ void part1(List<int> code) {
   }
 }
 
-
 List<int> getCode(String input) {
   return input.split(',').map((elem) => int.parse(elem)).toList();
 }
 
-void runCode(int index, List<int> code) {
+void runCode(int index, List<int> code){
   while (index < code.length - 3 && code[index] != 99) {
     try {
       operate(index, code);
