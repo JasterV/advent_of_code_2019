@@ -4,8 +4,8 @@ const READ = 3;
 const SHOW = 4;
 const JUMP_IF_TRUE = 5;
 const JUMP_IF_FALSE = 6;
-const EQUAL_TO = 7;
-const LESS_THAN = 8;
+const LESS_THAN = 7;
+const EQUAL_TO = 8;
 const HALT = 99;
 
 const Set operations = {
@@ -23,4 +23,7 @@ const Set operations = {
 const POSITION = 0;
 const IMMEDIATE = 1;
 
-const Set modes = {POSITION, IMMEDIATE};
+const Set modes = {
+  POSITION,
+  IMMEDIATE,
+};
