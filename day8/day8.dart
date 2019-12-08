@@ -9,14 +9,13 @@ Future main() async {
   String input = await file.readAsString();
   List<int> encodedImage =
       input.split('').map((elem) => int.parse(elem)).toList();
-      List<List<int>> layers = getLayersFromEncodedImage(encodedImage);
+  List<List<int>> layers = getLayersFromEncodedImage(encodedImage);
   part1(layers);
   part2(layers);
 }
 
 /*--------------------PART 1--------------------*/
 void part1(List<List<int>> layers) {
-  
   List<int> min0Layer = layers.reduce(min0);
   int result = computeResult(min0Layer);
   print("Fewess 0 layer computation: \n");
