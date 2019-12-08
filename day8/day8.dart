@@ -3,6 +3,8 @@ import 'dart:core';
 import 'dart:io';
 
 final int imageLength = 25 * 6;
+final int imageWeight = 25;
+final int imageHeight = 6;
 
 Future main() async {
   File file = File('day8.txt');
@@ -34,45 +36,45 @@ List<List<int>> getLayersFromEncodedImage(List<int> encodedImage) {
 int computeResult(List<int> layer) {
   Map<int, int> map = Map();
   layer.forEach((elem) {
-    if (map.containsKey(elem)) {
+    if (map.containsKey(elem))
       map[elem] += 1;
-    } else {
+    else
       map[elem] = 1;
-    }
   });
-
   return map[1] * map[2];
 }
 
 List<int> min0(List<int> fst, List<int> snd) {
-  int num0Fst = fst.where((elem) => elem == 0).length;
-  int num0snd = snd.where((elem) => elem == 0).length;
+  int num0Fst = 0, num0snd = 0;
+  fst.forEach((elem) {
+    if (elem == 0) num0Fst += 1;
+  });
+  snd.forEach((elem) {
+    if (elem == 0) num0snd += 1;
+  });
   return (num0Fst < num0snd) ? fst : snd;
 }
 
 /*--------------PART 2------------------*/
 
-void part2(List<List<int>> layers) {
-  List<int> decodedImage = decodeImage(layers);
-  printImage(decodedImage);
-}
+void part2(List<List<int>> layers) => printImage(decodeImage(layers));
 
 List<int> decodeImage(List<List<int>> layers) {
   List<int> decodedImage = List();
-  for (int i = 0; i < imageLength; ++i) {
-    for (List<int> layer in layers) {
+  for (var i = 0; i < imageLength; ++i)
+    for (var layer in layers)
       if (layer[i] != 2) {
         decodedImage.add(layer[i]);
         break;
       }
-    }
-  }
   return decodedImage;
 }
 
 void printImage(List<int> decodedImage) {
   print("Decoded Message: \n");
-  for (int i = 0; i < 6; ++i) {
-    print(decodedImage.getRange(i * 25, i * 25 + 25).toString());
+  for (var i = 0; i < imageHeight; i++) {
+    for (var j = imageWeight * i; j < imageWeight * (i + 1); ++j)
+      (decodedImage[j] == 0) ? stdout.write(' ') : stdout.write(1);
+    stdout.write('\n');
   }
 }
